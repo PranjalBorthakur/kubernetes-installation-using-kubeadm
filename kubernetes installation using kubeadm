@@ -21,6 +21,15 @@ EOF
        apt-get update
        
        apt-get install -y kubelet kubeadm kubectl
+       
+       apt-get install docker.io
+       
+       apt-get install docker
+       
+       systemctl start docker.service
+       
+       systemctl status docker.service                  # check the status of the docker service
+
 
 Step3: Creating a master node by initializing using kubeadm
 
