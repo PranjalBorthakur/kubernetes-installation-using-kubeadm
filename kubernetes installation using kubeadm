@@ -1,7 +1,7 @@
 Master node creation
 ---------------------------
 
-Step 1:
+Step 1: (optional)
 
        sysctl net.bridge.bridge-nf-call-iptables=1
 
@@ -15,10 +15,11 @@ Step2:
        
        cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
        deb http://apt.kubernetes.io/ kubernetes-xenial main
-       EOF
+EOF
        
        
        apt-get update
+       
        apt-get install -y kubelet kubeadm kubectl
 
 Step3: Creating a master node by initializing using kubeadm
@@ -38,18 +39,23 @@ Step5: copy the join token to a text editor
 Creation of a worker node
   ---------------------------
   
-  Step 1:
+  Step 1:(optional)
 
        sysctl net.bridge.bridge-nf-call-iptables=1
 
 Step2:
 
        apt-get update && apt-get install -y apt-transport-https
+       
        curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+       
+       
        cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
        deb http://apt.kubernetes.io/ kubernetes-xenial main
-       EOF
+EOF
+
        apt-get update
+       
        apt-get install -y kubelet kubeadm kubectl
        
 Step3:  kubeadm join --token <token> <master-ip>:<master-port> --discovery-token-ca-cert-hash sha256:<hash> 
