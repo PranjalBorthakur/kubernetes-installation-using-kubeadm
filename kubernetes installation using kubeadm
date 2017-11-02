@@ -67,8 +67,50 @@ EOF
        
        apt-get install -y kubelet kubeadm kubectl
        
+       apt-get install docker.io
+       
+       apt-get install docker
+       
+       systemctl start docker.service
+       
+       systemctl status docker.service                  # check the status of the docker service
+
+       
 Step3:  kubeadm join --token <token> <master-ip>:<master-port> --discovery-token-ca-cert-hash sha256:<hash> 
 
+
+
+Network Creation using Flannel
+--------------------------------------
+
+
+Step 1: Enter into master node 
+
+Ste2:   Check the status of the node using the following commands
+
+        Kubectl get nodes   #  Nodes will be showing NotReady due to the abscence of network creation settings
+        
+Step3: 
+
+        kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.0/Documentation/kube-flannel.yml
+        
+Step4:  Check the status of the node using the following commands
+
+        Kubectl get nodes  # Now the status of the node will be changed to Ready
+        
+        
+        
+  |-------------------------------------------------------------------------------|      
+  |  Your Cluster is ready ..... Happy coding and deployment :-))                 |
+  |-------------------------------------------------------------------------------|     
+
+
+For any doubts reachout to me 
+
+
+Follow me on Twitter for further updates:
+
+https://twitter.com/rahulkrishnanra
 
 
   
